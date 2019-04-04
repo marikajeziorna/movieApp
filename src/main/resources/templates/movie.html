@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmy</title>
+</head>
+<body>
+
+<a href="/">Powrót do listy filmów</a>
+
+<h1 th:text="${movie.title}"></h1>
+
+<p th:text="'Data premiery:' + ${movie.premiereDate}"></p>
+<p th:text="|Budżet: ${movie.budget}|"></p>
+<p th:text="|Dla kogo: ${movie.targetAudience}|"></p>
+
+<a th:href="|/usun/${movie.id}|">Usuń</a>
+
+
+</body>
+</html>

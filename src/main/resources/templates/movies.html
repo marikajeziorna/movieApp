@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmy</title>
+</head>
+<body>
+
+<a href="/addmovie">Dodaj film</a>
+
+<form method="get" action="/" th:object="${filters}">
+    <select name="targetAudience" th:field="*{targetAudience}">
+        <option value="">Wszystkie</option>
+        <option th:each="o: ${T(pl.javastart.myapp.TargetAudience).values()}"
+                th:value="${o.name()}"
+                th:text="${o.name()}"></option>
+    </select>
+    <input type="submit" value="Filtruj" />
+</form>
+
+<ul>
+    <li th:each="movie: ${movies}">
+        <a th:href="'/film/' + ${movie.id}" th:text="${movie.title}"></a>
+        &nbsp;
+        <a th:href="'/film/edytuj/' + ${movie.id}">(Edytuj)</a>
+        &nbsp;
+        <a th:href="'/usun/' + ${movie.id}">(Usuń)</a>
+    </li>
+</ul>
+
+</body>
+</html>

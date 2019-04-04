@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmy</title>
+</head>
+<body>
+
+<h1 th:if="${mode} == 'add'">Dodawanie filmu</h1>
+<h1 th:if="${mode} == 'edit'">Edycja filmu</h1>
+
+<form method="post" th:action="${mode} == 'add' ? '/addmovie' : '/editmovie'" th:object="${movie}">
+
+    <input type="hidden" th:field="*{id}" /><br/>
+    <input type="text" th:field="*{title}" /><br/>
+    <input type="date" th:field="*{premiereDate}" /><br/>
+
+    <select th:field="*{targetAudience}">
+        <option th:each="o: ${T(pl.javastart.myapp.TargetAudience).values()}"
+                th:value="${o.name()}"
+                th:text="${o.name()}"></option>
+    </select>
+
+    <br/>
+    <input type="number" th:field="*{budget}" /><br/>
+
+    <input th:if="${mode} == 'add'" type="submit" value="Dodaj!" />
+    <input th:if="${mode} == 'edit'" type="submit" value="Edytuj!" />
+
+</form>
+
+</body>
+</html>
