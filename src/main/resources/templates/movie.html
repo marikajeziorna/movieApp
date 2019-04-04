@@ -17,5 +17,16 @@
 <a th:href="|/usun/${movie.id}|">Usuń</a>
 
 
+<form action="/addcomment" method="post">
+    <input type="hidden" th:value="${movie.id}" name="movieId"/>
+    <textarea name="content"></textarea>
+    <input type="submit" value="dodaj" />
+</form>
+
+<div th:each="comment: ${movie.comments}" style="border: 1px solid black">
+    <p th:text="${#temporals.format(comment.addedTime, 'yyyy-MM-dd HH:mm')}"></p>
+    <p th:text="${comment.content}"></p>
+</div>
+
 </body>
 </html>

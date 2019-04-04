@@ -1,4 +1,4 @@
-package pl.javastart.myapp;
+package pl.javastart.myapp.movie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,6 +62,7 @@ public class MovieController {
 
     @GetMapping("/usun/{id}")
     public String delete(@PathVariable Long id) {
+
         movieRepository.deleteById(id);
         return "redirect:/";
     }

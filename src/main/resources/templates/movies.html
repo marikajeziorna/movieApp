@@ -11,7 +11,7 @@
 <form method="get" action="/" th:object="${filters}">
     <select name="targetAudience" th:field="*{targetAudience}">
         <option value="">Wszystkie</option>
-        <option th:each="o: ${T(pl.javastart.myapp.TargetAudience).values()}"
+        <option th:each="o: ${T(pl.javastart.myapp.movie.TargetAudience).values()}"
                 th:value="${o.name()}"
                 th:text="${o.name()}"></option>
     </select>

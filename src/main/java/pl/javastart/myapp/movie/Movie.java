@@ -1,10 +1,11 @@
-package pl.javastart.myapp;
+package pl.javastart.myapp.movie;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.javastart.myapp.TargetAudience;
+import pl.javastart.myapp.movie.comment.Comment;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -22,6 +23,10 @@ public class Movie {
 
     @Enumerated(EnumType.STRING)
     private TargetAudience targetAudience;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    @OrderBy("addedTime desc")
+    public List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -61,5 +66,13 @@ public class Movie {
 
     public void setTargetAudience(TargetAudience targetAudience) {
         this.targetAudience = targetAudience;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

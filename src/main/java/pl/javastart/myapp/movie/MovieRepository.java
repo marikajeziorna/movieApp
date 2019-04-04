@@ -1,4 +1,4 @@
-package pl.javastart.myapp;
+package pl.javastart.myapp.movie;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
