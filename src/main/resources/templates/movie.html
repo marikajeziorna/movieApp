@@ -16,9 +16,13 @@
 
 <a th:href="|/usun/${movie.id}|">Usuń</a>
 
+<div th:each="actors: ${movie.actors}" style="border: 2px solid red">
+    <p th:text="${actors.name}"></p>
+</div>
 
 <form action="/addcomment" method="post">
     <input type="hidden" th:value="${movie.id}" name="movieId"/>
+    <input name="author"/>
     <textarea name="content"></textarea>
     <input type="submit" value="dodaj" />
 </form>
@@ -26,6 +30,8 @@
 <div th:each="comment: ${movie.comments}" style="border: 1px solid black">
     <p th:text="${#temporals.format(comment.addedTime, 'yyyy-MM-dd HH:mm')}"></p>
     <p th:text="${comment.content}"></p>
+    <p th:text="${comment.author}"></p>
+    <a th:href="|/deletecomment/${comment.id}|">Usuń komentarz</a>
 </div>
 
 </body>

@@ -9,6 +9,16 @@ import java.time.LocalDateTime;
 @Entity
 public class Comment {
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    private String author;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

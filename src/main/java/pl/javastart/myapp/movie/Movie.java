@@ -1,6 +1,7 @@
 package pl.javastart.myapp.movie;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.javastart.myapp.movie.actor.Actor;
 import pl.javastart.myapp.movie.comment.Comment;
 
 import javax.persistence.*;
@@ -27,6 +28,10 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     @OrderBy("addedTime desc")
     public List<Comment> comments;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    public List<Actor> actors;
+
 
     public Long getId() {
         return id;
