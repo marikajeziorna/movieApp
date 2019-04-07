@@ -2,29 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .page {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .button {
+            color: white;
+            margin: 10px;
+        }
+
+        .list-view {
+            color: black;
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            margin: 10px;
+        }
+        .title{
+            margin: 10px;
+        }
+
+    </style>
     <title>Filmy</title>
 </head>
-<body>
+<body class="page">
+<button type="button" class="btn btn-primary">
+    <a class="button" href="/addmovie">Dodaj film</a>
+</button>
+<div>
+    <h5 class="title">Wybierz grupę wiekową</h5>
+    <form method="get" action="/" th:object="${filters}">
+        <select class="btn btn-primary" name="targetAudience" th:field="*{targetAudience}">
+            <option value="">Wszystkie</option>
+            <option th:each="o: ${T(pl.javastart.myapp.movie.TargetAudience).values()}"
+                    th:value="${o.name()}"
+                    th:text="${o.name()}"></option>
+            </label>
+            <div class="button">
+                <input class="btn btn-primary" type="submit" value="Filtruj"/>
+            </div>
+        </select>
 
-<a href="/addmovie">Dodaj film</a>
-
-<form method="get" action="/" th:object="${filters}">
-    <select name="targetAudience" th:field="*{targetAudience}">
-        <option value="">Wszystkie</option>
-        <option th:each="o: ${T(pl.javastart.myapp.movie.TargetAudience).values()}"
-                th:value="${o.name()}"
-                th:text="${o.name()}"></option>
-    </select>
-    <input type="submit" value="Filtruj" />
-</form>
-
-<ul>
+    </form>
+</div>
+<ul class="list-view">
     <li th:each="movie: ${movies}">
         <a th:href="'/film/' + ${movie.id}" th:text="${movie.title}"></a>
-        &nbsp;
-        <a th:href="'/film/edytuj/' + ${movie.id}">(Edytuj)</a>
-        &nbsp;
-        <a th:href="'/usun/' + ${movie.id}">(Usuń)</a>
+        <div class="button">
+            <a class="btn btn-primary" th:href="'/film/edytuj/' + ${movie.id}">Edytuj</a>
+            <a class="btn btn-primary" th:href="'/usun/' + ${movie.id}">Usuń</a>
+        </div>
     </li>
 </ul>
 

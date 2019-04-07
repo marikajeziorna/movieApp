@@ -2,37 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .page {
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .button {
+            color: white;
+            margin: 10px;
+        }
+        .btn-primary{
+            margin-bottom: 10px;
+        }
+        .comment-area{
+            margin-bottom: 5px;
+        }
+        .content{
+            margin: 10px;
+        }
+
+    </style>
+
     <title>Filmy</title>
 </head>
-<body>
+<body class="page">
 
 <a href="/">Powrót do listy filmów</a>
 
-<h1 th:text="${movie.title}"></h1>
-
-<p th:text="'Data premiery:' + ${movie.premiereDate}"></p>
+<h4>Tytuł filmu:</h4>
+<h4 th:text="${movie.title}"></h4>
+<p th:text="|Data premiery: ${movie.premiereDate}|"></p>
 <p th:text="|Budżet: ${movie.budget}|"></p>
 <p th:text="|Dla kogo: ${movie.targetAudience}|"></p>
-
-<a th:href="|/usun/${movie.id}|">Usuń</a>
+<div class="button">
+<a class="btn btn-primary"  th:href="|/usun/${movie.id}|">Usuń film</a>
+</div>
 
 <div th:each="actors: ${movie.actors}" style="border: 2px solid red">
     <p th:text="${actors.name}"></p>
 </div>
-
+<h5>Dodaj komentarz</h5>
 <form action="/addcomment" method="post">
-    <input type="hidden" th:value="${movie.id}" name="movieId"/>
-    <input name="author"/>
-    <textarea name="content"></textarea>
-    <input type="submit" value="dodaj" />
+    <div class="form-group">
+        <input type="hidden" th:value="${movie.id}" name="movieId"/><br/>
+        <input type="text" placeholder="Autor" name="author" class="form-control"/><br/>
+        <textarea name="content" class="form-control"></textarea><br/>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+            <input type="submit" value="Dodaj!"/>
+        </button>
+    </div>
 </form>
-
-<div th:each="comment: ${movie.comments}" style="border: 1px solid black">
+<div class="comment-area" th:each="comment: ${movie.comments}" style="border: 1px black">
+    <div class="content">
     <p th:text="${#temporals.format(comment.addedTime, 'yyyy-MM-dd HH:mm')}"></p>
     <p th:text="${comment.content}"></p>
     <p th:text="${comment.author}"></p>
-    <a th:href="|/deletecomment/${comment.id}|">Usuń komentarz</a>
+    <button class="btn btn-primary">
+    <a class="button" th:href="|/deletecomment/${comment.id}|">Usuń komentarz</a>
+    </button>
+    </div>
 </div>
-
 </body>
+
 </html>

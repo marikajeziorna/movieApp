@@ -2,31 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        .page{
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+    </style>
     <title>Filmy</title>
 </head>
-<body>
+<body class="page">
 
 <h1 th:if="${mode} == 'add'">Dodawanie filmu</h1>
 <h1 th:if="${mode} == 'edit'">Edycja filmu</h1>
 
-<form method="post" th:action="${mode} == 'add' ? '/addmovie' : '/editmovie'" th:object="${movie}">
-
-    <input type="hidden" th:field="*{id}" /><br/>
-    <input type="text" th:field="*{title}" /><br/>
-    <input type="date" th:field="*{premiereDate}" /><br/>
-
-    <select th:field="*{targetAudience}">
-        <option th:each="o: ${T(pl.javastart.myapp.movie.TargetAudience).values()}"
-                th:value="${o.name()}"
-                th:text="${o.name()}"></option>
-    </select>
-
-    <br/>
-    <input type="number" th:field="*{budget}" /><br/>
-
-    <input th:if="${mode} == 'add'" type="submit" value="Dodaj!" />
-    <input th:if="${mode} == 'edit'" type="submit" value="Edytuj!" />
-
+<form action="/action_page.php" method="post" th:action="${mode} == 'add' ? '/addmovie' : '/editmovie'"
+      th:object="${movie}">
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}"/><br/>
+        <input type="text" placeholder="Tytuł" th:field="*{title}" class="form-control"/><br/>
+        <input type="date" th:field="*{premiereDate}" class="form-control"/><br/>
+    </div>
+    <div class="form-group">
+        <h6 class="title">Wybierz grupę wiekową</h6>
+        <select class="form-control"  th:field="*{targetAudience}">
+            <option class="form-control"  th:each="o: ${T(pl.javastart.myapp.movie.TargetAudience).values()}"
+                    th:value="${o.name()}"
+                    th:text="${o.name()}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" placeholder="Budżet" th:field="*{budget}"/><br/>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">
+            <input th:if="${mode} == 'add'" type="submit" value="Dodaj!"/>
+            <input th:if="${mode} == 'edit'" type="submit" value="Edytuj!"/>
+        </button>
+    </div>
 </form>
 
 </body>
