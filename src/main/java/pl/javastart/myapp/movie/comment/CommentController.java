@@ -46,6 +46,4 @@ public class CommentController {
         commentService.delete(id);
         return "redirect:/film/" + movieId;
     }
-
-
 }

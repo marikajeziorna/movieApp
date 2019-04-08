@@ -3,7 +3,6 @@ package pl.javastart.myapp.movie.comment;
 import org.springframework.stereotype.Service;
 import pl.javastart.myapp.movie.Movie;
 
-import javax.persistence.SecondaryTable;
 import java.util.Optional;
 
 @Service
@@ -28,6 +27,5 @@ public class CommentService {
         Comment comment = optionalComment.orElse(null);
         Movie movie = comment.getMovie();
         return movie.getId();
-
     }
 }

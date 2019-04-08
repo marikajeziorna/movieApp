@@ -11,27 +11,28 @@ import java.util.List;
 @Entity
 public class Movie {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String title;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate premiereDate;
-
-    private long budget;
-
-    @Enumerated(EnumType.STRING)
-    private TargetAudience targetAudience;
-
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     @OrderBy("addedTime desc")
     public List<Comment> comments;
-
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     public List<Actor> actors;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate premiereDate;
+    private long budget;
+    @Enumerated(EnumType.STRING)
+    private TargetAudience targetAudience;
 
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
 
     public Long getId() {
         return id;

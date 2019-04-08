@@ -11,7 +11,7 @@
     <groupId>pl.javastart</groupId>
     <artifactId>myapp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>myapp</name>
+    <nameActor>myapp</nameActor>
     <description>Demo project for Spring Boot</description>
 
     <properties>

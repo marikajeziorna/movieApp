@@ -2,7 +2,10 @@ package pl.javastart.myapp.movie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +23,7 @@ public class MovieController {
     public String allMovies(Model model, @RequestParam(required = false) TargetAudience targetAudience) {
 
         List<Movie> movies;
-        if(targetAudience == null) {
+        if (targetAudience == null) {
             movies = movieRepository.findAll();
         } else {
             movies = movieRepository.findByTargetAudience(targetAudience);
@@ -76,7 +79,6 @@ public class MovieController {
             model.addAttribute("movie", movie);
             model.addAttribute("mode", "edit");
             return "addMovieForm";
-
         } else {
             return "redirect:/";
         }
@@ -84,10 +86,7 @@ public class MovieController {
 
     @PostMapping("/editmovie")
     public String editMovie(Movie movie) {
-
-        String text = (5 < 2) ? "a": "b";
-
-
+        String text = (5 < 2) ? "a" : "b";
         movieRepository.save(movie);
         return "redirect:/film/" + movie.getId();
     }

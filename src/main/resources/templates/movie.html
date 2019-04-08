@@ -10,17 +10,25 @@
             margin-left: 20px;
             margin-right: 20px;
         }
+
         .button {
             color: white;
             margin: 10px;
         }
-        .btn-primary{
+
+        .btn-primary {
             margin-bottom: 10px;
         }
-        .comment-area{
+
+        .btn btn-link {
+            color: black;
+        }
+
+        .comment-area {
             margin-bottom: 5px;
         }
-        .content{
+
+        .content {
             margin: 10px;
         }
 
@@ -38,35 +46,45 @@
 <p th:text="|Budżet: ${movie.budget}|"></p>
 <p th:text="|Dla kogo: ${movie.targetAudience}|"></p>
 <div class="button">
-<a class="btn btn-primary"  th:href="|/usun/${movie.id}|">Usuń film</a>
+    <a class="btn btn-primary" th:href="|/usun/${movie.id}|">Usuń film</a>
+</div>
+<h5>Dodaj aktora</h5>
+<form action="/addactor" method="post">
+    <div class="form-group">
+        <input type="hidden" th:value="${movie.id}" name="movieId"/><br/>
+        <input type="text" placeholder="Aktor nameActor" name="name" class="form-control"/><br/>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Dodaj aktora</button>
+    </div>
+</form>
+<div th:each="actor: ${movie.actors}" style="border: 1px solid">
+    <p th:text="${actor.name}"></p>
+    <button class="btn btn-link">
+        <a class="button" th:href="|/deletactor/${actor.id}|">Usuń aktora</a>
+    </button>
 </div>
 
-<div th:each="actors: ${movie.actors}" style="border: 2px solid red">
-    <p th:text="${actors.name}"></p>
-</div>
 <h5>Dodaj komentarz</h5>
 <form action="/addcomment" method="post">
     <div class="form-group">
         <input type="hidden" th:value="${movie.id}" name="movieId"/><br/>
-        <input type="text" placeholder="Autor" name="author" class="form-control"/><br/>
+        <input type="text" placeholder="Nickname" name="author" class="form-control"/><br/>
         <textarea name="content" class="form-control"></textarea><br/>
     </div>
     <div>
-        <button type="submit" class="btn btn-primary">
-            <input type="submit" value="Dodaj!"/>
-        </button>
+        <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
     </div>
 </form>
-<div class="comment-area" th:each="comment: ${movie.comments}" style="border: 1px black">
+<div class="comment-area" th:each="comment: ${movie.comments}" style="border: 1px solid">
     <div class="content">
-    <p th:text="${#temporals.format(comment.addedTime, 'yyyy-MM-dd HH:mm')}"></p>
-    <p th:text="${comment.content}"></p>
-    <p th:text="${comment.author}"></p>
-    <button class="btn btn-primary">
-    <a class="button" th:href="|/deletecomment/${comment.id}|">Usuń komentarz</a>
-    </button>
+        <p th:text="${#temporals.format(comment.addedTime, 'yyyy-MM-dd HH:mm')}"></p>
+        <p th:text="${comment.content}"></p>
+        <p th:text="${comment.author}"></p>
+        <button class="btn btn-link">
+            <a class="button" th:href="|/deletecomment/${comment.id}|">Usuń komentarz</a>
+        </button>
     </div>
 </div>
 </body>
-
 </html>

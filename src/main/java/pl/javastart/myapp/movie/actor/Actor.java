@@ -1,7 +1,6 @@
 package pl.javastart.myapp.movie.actor;
 
 import pl.javastart.myapp.movie.Movie;
-
 import javax.persistence.*;
 
 @Entity
@@ -31,7 +30,7 @@ public class Actor {
         return name;
     }
 
-    public void setName(String name) {
+    public void setNameActor(String name) {
         this.name = name;
     }
 
